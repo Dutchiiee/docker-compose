@@ -1,0 +1,15 @@
+ mcdb:
+    image: mariadb
+    container_name: mcdb
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=<redacted>
+      - MARIADB_ROOT_PASSWORD=<redacted>
+      - MARIADB_USER=<redacted>
+      - MARIADB_PASSWORD=<redacted>
+    volumes:
+      - "/mnt/drive2/Fileshare/Docker/mcdb:/var/lib/mysql"
+    command: '--default-authentication-plugin=mysql_native_password --wait-timeout=28800'
+    networks:
+      - mc
