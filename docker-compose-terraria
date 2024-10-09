@@ -1,0 +1,21 @@
+terraria:
+   container_name: terraria
+   image: beardedio/terraria:latest
+   ports:
+     - "7777:7777"
+   stdin_open: true
+   tty: true
+   volumes:
+     - "/mnt/drive2/Fileshare/Docker/Terraria/config:/config"
+   restart: unless-stopped
+ tmlserver:
+    container_name: tmlserver
+    image: gedasfx/tmodloader-server
+    environment:
+      - TMLSERVER_VERSION=2022.09.47.11
+    volumes:
+      - "/mnt/drive2/Fileshare/Docker/tmlserver/data:/data"
+      - "/mnt/drive2/Fileshare/Docker/tmlserver/data/server/serverconfig.txt:/server/serverconfig.txt"
+    ports:
+      - "7778:7778"
+    restart: unless-stopped
