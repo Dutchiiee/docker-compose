@@ -1,0 +1,59 @@
+samba:
+    container_name: samba
+    environment:
+      GROUPID: "1000"
+      NMBD: "true"
+      SHARE: FS01-Linux;/storage;yes;no;yes;all
+      TZ: Europe/Amsterdam
+      USER: ds;ds
+      USERID: "1000"
+      WORKGROUP: WORKGROUP
+    hostname: DockSTARTer
+    image: dperson/samba
+    logging:
+      driver: json-file
+      options:
+        max-file: "10"
+        max-size: 200k
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 137
+      published: "137"
+      protocol: udp
+    - mode: ingress
+      target: 138
+      published: "138"
+      protocol: udp
+    - mode: ingress
+      target: 139
+      published: "139"
+      protocol: tcp
+    - mode: ingress
+      target: 445
+      published: "445"
+      protocol: tcp
+    restart: unless-stopped
+    volumes:
+    - type: bind
+      source: /etc/localtime
+      target: /etc/localtime
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /home/guylian/.config/appdata
+      target: /DockSTARTer/config
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /mnt/drive2/Fileshare
+      target: /DockSTARTer/storage
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /mnt/drive2/Fileshare
+      target: /storage
+      bind:
+        create_host_path: true
