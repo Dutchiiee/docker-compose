@@ -1,0 +1,43 @@
+mcb-lobby:
+    container_name: mcb-lobby
+    image: itzg/minecraft-server
+    expose:
+      - "25565"
+      - "28016"
+    volumes:
+      - "/mnt/drive2/Fileshare/Docker/mcb-lobby:/data"
+      - "/mnt/drive2/Fileshare/Docker/mcb-lobby/plugins:/plugins"
+      - "/mnt/drive2/Fileshare/Docker/mcb-lobby/common/banned-ips.json:/data/banned-ips.json"
+      - "/mnt/drive2/Fileshare/Docker/mcb-lobby/common/banned-players.json:/data/banned-players.json"
+      - "/mnt/drive2/Fileshare/Docker/mcb-lobby/common/banned-ips.json:/data/FeedTheBeast/banned-ips.json"
+      - "/mnt/drive2/Fileshare/Docker/mcb-lobby/common/banned-players.json:/data/FeedTheBeast/banned-players.json"
+      - "/mnt/drive2/Fileshare/Docker/mcb-lobby/common/ops.json:/data/FeedTheBeast/ops.json"
+    environment:
+      EULA: "TRUE"
+      ONLINE_MODE: "false"
+      TYPE: "PAPER"
+      VERSION: "1.18.2"
+      SERVER_NAME: "mcb-lobby"
+      LEVEL_TYPE: "DEFAULT"
+      PVP: "false"
+      SPAWN_ANIMALS: "false"
+      SPAWN_MONSTERS: "false"
+      SPAWN_NPCS: "false"
+      GENERATE_STRUCTURES: "false"
+      ALLOW_NETHER: "false"
+      ALLOW_END: "false"
+      MAX_WORLD_SIZE: "500"
+      OPS: "<redacted>"
+      FORCE_GAMEMODE: "true"
+      MODE: "adventure"
+      MOTD: "Lobby Minecraft Server"
+      CONSOLE: "false"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "<redacted>"
+      RCON_PORT: 28016
+    restart: unless-stopped
+    networks:
+      - mc
+    depends_on:
+      - mcdb
+      - mcb-bungee
