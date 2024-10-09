@@ -1,0 +1,33 @@
+ mcb-creative:
+     container_name: mcb-creative
+     image: itzg/minecraft-server
+     expose:
+       - "25566"
+       - "28016"
+     volumes:
+       - "/mnt/drive2/Fileshare/Docker/mcb-creative:/data"
+       - "/mnt/drive2/Fileshare/Docker/mcb-creative/plugins:/plugins"
+       - "/mnt/drive2/Fileshare/Docker/mcb-creative/common/banned-ips.json:/data/banned-ips.json"
+       - "/mnt/drive2/Fileshare/Docker/mcb-creative/common/banned-players.json:/data/banned-players.json"
+       - "/mnt/drive2/Fileshare/Docker/mcb-creative/common/banned-ips.json:/data/FeedTheBeast/banned-ips.json"
+       - "/mnt/drive2/Fileshare/Docker/mcb-creative/common/banned-players.json:/data/FeedTheBeast/banned-players.json"
+     environment:
+       EULA: "TRUE"
+       ONLINE_MODE: "false"
+       TYPE: "PAPER"
+       VERSION: "1.18.2"
+       SERVER_NAME: "mcb-creative"
+       OPS: "<redacted>"
+       MAX_MEMORY: "3G"
+       FORCE_GAMEMODE: "true"
+       MODE: "creative"
+       MOTD: "creative Minecraft Server"
+       CONSOLE: "false"
+       ENABLE_RCON: "true"
+       RCON_PASSWORD: "<redacted>"
+       RCON_PORT: 28016
+     restart: unless-stopped
+     networks:
+      - mc
+     depends_on:
+      - mcb-lobby
