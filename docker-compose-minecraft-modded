@@ -1,0 +1,31 @@
+minecraft-modded:
+    container_name: minecraft-modded
+    image: itzg/minecraft-server
+    ports:
+    - "25565:25565"
+    volumes:
+      - "/mnt/drive2/Fileshare/Docker/mcb-vanilla:/data"
+      - "/mnt/drive2/Fileshare/Docker/mcb-vanilla/plugins:/plugins"
+      - "/mnt/drive2/Fileshare/Docker/mcb-vanilla/common/banned-ips.json:/data/banned-ips.json"
+      - "/mnt/drive2/Fileshare/Docker/mcb-vanilla/common/banned-players.json:/data/banned-players.json"
+      - "/mnt/drive2/Fileshare/Docker/mcb-vanilla/common/banned-ips.json:/data/FeedTheBeast/banned-ips.json"
+      - "/mnt/drive2/Fileshare/Docker/mcb-vanilla/common/banned-players.json:/data/FeedTheBeast/banned-players.json"
+    environment:
+      EULA: TRUE
+      ONLINE_MODE: "True"
+      TYPE: Neoforge
+      VERSION: "1.21.1"
+      NEOFORGE_VERSION: "21.1.59"
+      SERVER_NAME: <redacted>
+      OPS: <redacted>
+      FORCE_GAMEMODE: "true"
+      MODE: "survival"
+      MAX_MEMORY: "8G"
+      SEED: "Mixer"
+      MOTD: <redacted>
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "<redacted>"
+      RCON_PORT: 28016
+    restart: unless-stopped
+    networks:
+      - mc
