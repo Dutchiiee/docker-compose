@@ -1,0 +1,75 @@
+plex:
+    container_name: plex
+    network_mode: host
+    environment:
+      PGID: "1000"
+      PLEX_CLAIM: https://plex.tv/claim
+      PUID: "1000"
+      TZ: Europe/Amsterdam
+      VERSION: docker
+    hostname: fs01-linux
+    image: lscr.io/linuxserver/plex:latest
+    logging:
+      driver: json-file
+      options:
+        max-file: "10"
+        max-size: 200k
+    ports:
+      - mode: ingress
+        target: 1900
+        published: "1900"
+        protocol: udp
+      - mode: ingress
+        target: 3005
+        published: "3005"
+        protocol: tcp
+      - mode: ingress
+        target: 32400
+        published: "32400"
+        protocol: tcp
+      - mode: ingress
+        target: 32410
+        published: "32410"
+        protocol: udp
+      - mode: ingress
+        target: 32412
+        published: "32412"
+        protocol: udp
+      - mode: ingress
+        target: 32413
+        published: "32413"
+        protocol: udp
+      - mode: ingress
+        target: 32414
+        published: "32414"
+        protocol: udp
+      - mode: ingress
+        target: 32469
+        published: "32469"
+        protocol: tcp
+      - mode: ingress
+        target: 33400
+        published: "33400"
+        protocol: tcp
+      - mode: ingress
+        target: 8324
+        published: "8324"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: <redacted>
+        target: /config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: /mnt/drive2/Fileshare
+        target: /storage
+        bind:
+          create_host_path: true
