@@ -1,0 +1,14 @@
+mcb-bungee:
+    container_name: mcb-bungee
+    image: itzg/bungeecord
+    ports:
+      - "25565:25577"
+    volumes:
+      - "/mnt/drive2/Fileshare/Docker/mcb-bungee:/server"
+      - "/mnt/drive2/Fileshare/Docker/mcb-bungee/plugins:/plugins"
+      - "/mnt/drive2/Fileshare/Docker/mcb-bungee/config:/config"
+    restart: unless-stopped
+    networks:
+      - mc
+    depends_on:
+      - mcdb
